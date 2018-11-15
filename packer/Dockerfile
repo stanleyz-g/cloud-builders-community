@@ -9,6 +9,7 @@ COPY packer_${PACKER_VERSION}_linux_amd64.zip .
 RUN echo "${PACKER_VERSION_SHA256SUM} packer_${PACKER_VERSION}_linux_amd64.zip" > checksum && sha256sum -c checksum
 RUN apt-get -y update && apt-get -y install unzip && /usr/bin/unzip packer_${PACKER_VERSION}_linux_amd64.zip
 
+ENV FOO="FOO"
 FROM ubuntu
 RUN apt-get -y update && apt-get -y install ca-certificates && rm -rf /var/lib/apt/lists/*
 COPY --from=0 packer /usr/bin/packer
